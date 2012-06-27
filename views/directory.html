@@ -1,0 +1,25 @@
+
+<div class="well" style="padding: 8px 0;">
+<ul class="nav nav-list">
+{{ directories.forEach(function(dir){ }}
+	<li>
+		<a href="{{=dir.path}}/">
+			<i class="icon-folder-open"></i>
+			{{=dir.name}}
+		</a>
+	</li>
+{{ }); }}
+{{ files.forEach(function(file){ }}
+	<li>
+		<a href="{{=file.path}}">
+			<i class="icon-file"></i>
+			{{=file.name}}
+		</a>
+	</li>
+{{ }); }}
+</ul>
+</div>
+
+{{ if(readme.exists){ }}
+	{{-readme.content /*readme.extension*/}}
+{{ } }}
