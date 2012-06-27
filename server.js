@@ -66,9 +66,7 @@ app.engine('html', (function(){
 
 	  // cached
 	  if (options.cache && str) return fn(null, str);
-	  options.open = '{{';
-	  options.close = '}}';
-
+	  
 	  // read
 	  fs.readFile(path, 'utf8', function(err, str){
 	    if (err) return fn(err);
@@ -240,28 +238,26 @@ marked.setOptions({
 });
 
 proxy.directory = function(data, req, res, next){
-	data.breadcrumb = breadcrumb(req);
+	//data.breadcrumb = breadcrumb(req);
 	if(data.readme.exists){
 		data.readme.content = marked(data.readme.content);
 	}
 	res.render('directory', data);
 };
 proxy.file = function(data, req, res, next){
-	data.breadcrumb = breadcrumb(req);
+	//data.breadcrumb = breadcrumb(req);
 	res.render('file', require('./filehandler').formatContent(data));
 };
 proxy.user = function(data, req, res, next){
-	data.breadcrumb = breadcrumb(req);
+	//data.breadcrumb = breadcrumb(req);
 	res.render('userProfile', data);
 };
 proxy.image = function(data, req, res, next){
-	data.breadcrumb = breadcrumb(req);
+	//data.breadcrumb = breadcrumb(req);
 	res.render('image', data);
 };
 
-function breadcrumb(req){
-	var path = require('url').parse(req.url).pathname.split(/\//g).filter(function(s){return s.length > 0;});
-
+function breadcrumb(path){
 	var buffer = ['<ul class="breadcrumb">'];
 	var pathSoFar = '/';
 	path.forEach(function(part, i){
@@ -272,3 +268,12 @@ function breadcrumb(req){
 	buffer.push('</ul>');
 	return buffer.join('\n');
 }
+
+app.locals.use(function(req,res){
+	var path = require('url').parse(req.url).pathname.split(/\//g).filter(function(s){return s.length > 0;});
+	if(path.length > 1){
+		res.locals.breadcrumb = breadcrumb(path);
+	}
+	res.locals.open  = '{{';
+	res.locals.close = '}}';
+});
