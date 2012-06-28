@@ -1,29 +1,18 @@
-var marked = require('marked');
-// Set default options
-marked.setOptions({
-  gfm: true,
-  pedantic: false,
-  sanitize: true,
-  // callback for code highlighter
-  highlight: require('../highlighter')
-});
+var process = require('./fileprocessor').process;
+require('./filehelpers');
+var render = require('./filerenderer').render;
 
-exports.formatContent = function(file){
-	(function(){
-		var extension = /.(\w*)$/g.exec(file.path)[0];
+exports.renderFile = function(file, res){
+    var locals = {
+        mode:'render',
+        path:file.path,
+        name:file.name,
+        extension:/.(\w*)$/g.exec(file.path)[0],
+        source:file.source,
+        content:file.content
+    };
 
-		if(extension === ".md" || extension === ".markdown")return file.content = marked(file.content);
+    process(locals);
 
-		/*file.content = String(file.content)
-			.replace(/&(?!\w+;)/g, '&amp;')
-			.replace(/</g, '&lt;')
-			.replace(/>/g, '&gt;')
-			.replace(/"/g, '&quot;');*/
-		file.content = '<h1>'+String(file.name)
-			.replace(/&(?!\w+;)/g, '&amp;')
-			.replace(/</g, '&lt;')
-			.replace(/>/g, '&gt;')
-			.replace(/"/g, '&quot;')+'</h1><pre><code>'+require('../highlighter')(file.content, extension.substr(1))+'</code></pre>';
-	}());
-	return file;
+    render(locals, res);
 };

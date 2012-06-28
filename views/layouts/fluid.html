@@ -1,0 +1,43 @@
+{{inherits('base')}}
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">GitHub Documentation</a>
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> Username
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Profile</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Sign Out</a></li>
+            </ul>
+          </div>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="#about">Fork on GitHub</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      {{ if(typeof breadcrumb === 'string'){ }}{{-breadcrumb}}{{ } }}
+      
+      {{-contents}}
+
+      <hr>
+
+      <footer>
+        <a href="http://www.jepso.com"><p>&copy; JEPSO 2012</p></a>
+      </footer>
+
+    </div><!--/.fluid-container-->

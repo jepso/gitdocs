@@ -1,4 +1,9 @@
+{{ inherits('layouts/fluid') -}}
 
+{{ if(readme.exists){ }}
+	<div class="row-fluid">
+    <div class="span3">
+{{ } }}
 <div class="well" style="padding: 8px 0;">
 <ul class="nav nav-list">
 {{ directories.forEach(function(dir){ }}
@@ -21,5 +26,9 @@
 </div>
 
 {{ if(readme.exists){ }}
-	{{-readme.content /*readme.extension*/}}
+    </div><!--/span-->
+    <div class="span9">
+        {{-readme.content /*readme.extension*/}}
+    </div><!--/span-->
+</div><!--/row-->
 {{ } }}
