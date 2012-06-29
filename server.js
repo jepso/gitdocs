@@ -28,6 +28,7 @@ var app 	  = express.createServer();
 var getObject = require('./git-api').getObject;
 
 /**
+ * # Proxy
  * The [git-proxy](git-proxy.js) is the module of the application that 
  * decides how to render each page from GitHub.
  */
