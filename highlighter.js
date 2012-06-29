@@ -11,7 +11,7 @@ module.exports = function(code, lang, preventGuessing) {
 	}
     if(preventGuessing !== true){
         var t = hljs.highlightAuto(code);
-    	if (t.relevance > 10) { //If we really don't know, we should just admit it :)
+    	if ((t.relevance / code.split(/\n/g).length) > 1) { //If we really don't know, we should just admit it :)
             return t.value;
         } else {
             return code;
@@ -22,7 +22,6 @@ module.exports = function(code, lang, preventGuessing) {
 }
 
 var aliases = {
-	json:'javascript',
 	js:'javascript',
     md:'markdown'
 };
