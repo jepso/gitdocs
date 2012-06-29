@@ -40,7 +40,7 @@ function checkDirectory(dir) {
         });
     }
 }
-var templates = Q.all(checkDirectory(require('path').resolve('./views/filetypes'))).then(function (templateList) {
+var templates = Q.all(checkDirectory(require('path').resolve(__dirname +'/../views/filetypes'))).then(function (templateList) {
     var templates = {byExtension:{}, default:[]};
     templateList.forEach(function(template){
         if (template.supportsAll) {

@@ -3,16 +3,16 @@ var lessMiddleware = require('less-middleware');
 module.exports = function (app) {
 
     (function (fs) {//rename .css to .less
-        fs.readdirSync('./style/source/highlighter-styles').forEach(function (file) {
+        fs.readdirSync(__dirname + '/style/source/highlighter-styles').forEach(function (file) {
             if (/\.css$/g.test(file)) {
-                var path = './style/source/highlighter-styles/' + file;
+                var path = __dirname + '/style/source/highlighter-styles/' + file;
                 fs.renameSync(path, path.replace(/\.css$/g, '.less'));
             }
         });
     }(require('fs')));
     (function (fs) {//build highlighter .less file
         var names = [];
-        fs.readdirSync('./style/source/highlighter-styles').forEach(function (file) {
+        fs.readdirSync(__dirname + '/style/source/highlighter-styles').forEach(function (file) {
             if (/\.less$/g.test(file)) {
                 names.push(file.replace(/\.less$/g, ''));
             }
@@ -23,8 +23,8 @@ module.exports = function (app) {
                     '    @import "highlighter-styles/' + name + '.less";',
                     '}'].join('\n');
         }).join('\n');
-        fs.unlinkSync('./style/source/highlight.less');
-        fs.writeFileSync('./style/source/highlight.less', source);
+        try {fs.unlinkSync(__dirname + '/style/source/highlight.less');}catch(ex){}
+        fs.writeFileSync(__dirname + '/style/source/highlight.less', source);
         app.locals.use(function (req, res) {
             res.locals.highlightThemes = names;
             res.locals.highlightThemeSelected = 'default';

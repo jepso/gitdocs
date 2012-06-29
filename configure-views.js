@@ -3,6 +3,7 @@ var Q = require('q');
 module.exports = function (app) {
     app.engine('html', require('consolidate').qejs);
     app.set('view engine', 'html');
+    app.set('views', __dirname + '/views');
     app.locals.use(function (req, res) {
         res.locals.open  = '{{';
         res.locals.close = '}}';
