@@ -1,3 +1,11 @@
+/**
+ * # Server.js
+ *
+ * Server.js is the entry point of the application, it loads all the necessary modules.
+ */
+
+/*!
+  */
 //Reserved prefixes:
 //  api
 //  admin

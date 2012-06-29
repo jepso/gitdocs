@@ -22,7 +22,7 @@ function use(extensions, name, method){
         if (typeof name !== 'string') throw new TypeError('Name must be of type string');
         if (typeof method !== 'function') throw new TypeError('Method must be of type function');
         if (typeof extensions === 'string' && /^(\.?\w+)+$/g.test(extensions)) {
-            extensions = extensions.split(/\./g);
+            extensions = extensions.split(/\./g).filter(function (v) { return v.length > 0; });
         }
         if (!Array.isArray(extensions) ||
             !extensions.every(function (v) { return typeof v === 'string' && /\.?\w+/g.test(v); })) {

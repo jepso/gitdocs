@@ -2,18 +2,17 @@ var use = require('./fileprocessor').use;
 var Q = require('q');
 
 
-var marked = require('marked');
-// Set default options
-marked.setOptions({
-    gfm: true,
-    pedantic: false,
-    sanitize: true,
-    // callback for code highlighter
-    highlight: require('../highlighter')
-});
-
-use(['.md', '.markdown'], 'marked', function(content){
-    var tokens = marked.lexer(content||this.content);
+function marked(content){
+    var marked = require('marked');
+    // Set default options
+    marked.setOptions({
+        gfm: true,
+        pedantic: false,
+        sanitize: true,
+        // callback for code highlighter
+        highlight: require('../highlighter')
+    });
+    var tokens = marked.lexer(content);
     var path = [];
     var nav = [];
     for (var i = 0; i < tokens.length; i++) {
@@ -28,7 +27,10 @@ use(['.md', '.markdown'], 'marked', function(content){
         }
     }
     var text = marked.parser(tokens);
-    return Q.when({text:text, nav:nav});
+    return {text:text, nav:nav};
+}
+use(['.md', '.markdown'], 'marked', function (content) {
+    return Q.when(marked(content||this.content));
 });
 
 use('highlight', function(source, lang, preventGuessing){
@@ -41,3 +43,23 @@ use('highlight', function(source, lang, preventGuessing){
     return Q.when(require('../highlighter')(source, lang, preventGuessing));
 });
 
+use('.js', 'dox', function (options) {
+    var content = this.content;
+    return Q.when(options, function (options){
+        options = options || {};
+        var raw = options.raw;
+        options.raw = true;
+        var processed = require('dox').parseComments(content, options);
+        if (!raw) {
+            processed.forEach(function (comment) {
+                var description = comment.description;
+                description.full = marked(description.full).text;
+                description.summary = marked(description.summary).text;
+                description.body = marked(description.body).text;
+            });
+        }
+        return processed;
+    }).fail(function (err) {
+        return [{description:{full:''}, code:content}];
+    });
+});
