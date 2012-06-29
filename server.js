@@ -14,6 +14,7 @@ var proxy 	  = require('./git-proxy');
 require('./configure-views')(app);
 require('./configure-style')(app);
 app.use(express.static(__dirname + '/static'));
+require('./configure-settings')(app);
 
 app.get('/', function(req, res){
   res.render('home');
@@ -30,7 +31,7 @@ app.get('/api/cache', function(req,res){
 app.get('/api/cache/clean', function(req,res){
 	cacheHandler.clean();
 	res.send('Cache Cleaned', 200);
-})
+});
 
 app.use(app.router);
 

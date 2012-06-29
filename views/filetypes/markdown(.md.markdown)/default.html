@@ -1,0 +1,14 @@
+{{ if (mode==='describe') { 
+    extensions.supports('.md', '.markdown');
+} else if (mode === 'render') { }}
+{{ inherits('layouts/fluid') -}}
+<div class="row-fluid">
+    <div class="span2">
+    </div><!--/span-->
+    <div class="span8">
+        <pre><code>{{-marked()}}</code></pre>
+    </div><!--/span-->
+    <div class="span2">
+    </div><!--/span-->
+</div><!--/row-->
+{{ } }}

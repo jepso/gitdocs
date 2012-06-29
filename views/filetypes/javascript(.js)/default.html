@@ -1,11 +1,11 @@
-{{ if(mode === 'render'){ }}
-{{ inherits('layouts/fluid') -}}
+{{ if(mode === 'describe') {
+    extensions.supports('js');
+} else if (mode==='render') {
+    inherits('layouts/fluid') -}}
 <div class="row-fluid">
     <div class="span3">
         <div class="well">
-            <h1>{{=name}}</h2>
-
-            <p>This file just uses the generic default file handler.</p>
+            <p>This file is JavaScript.</p>
 
             <p>Can you help us provide better formatting for it?  Maybe even a way of automatically parsing it for documentation?  If so, help us expand our list of supported file types.</p>
 
@@ -16,6 +16,4 @@
         <pre><code>{{-highlight()}}</code></pre>
     </div><!--/span-->
 </div><!--/row-->
-{{ } else if (mode==='describe') { 
-    extensions.supportsAll();
- } }}
+{{ } }}

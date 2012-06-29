@@ -23,7 +23,7 @@ function directory(data, req, res, next) {
     res.render('directory', data);
 };
 function file(data, req, res, next) {
-    require('./filehandler').renderFile(data, res);
+    require('./filehandler').renderFile(data, req, res);
 };
 function image(data, req, res, next) {
     res.render('filetypes/images(.png.gif.jpeg.jpg)/image', data);

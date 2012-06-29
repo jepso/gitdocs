@@ -9,15 +9,9 @@
           </a>
           <a class="brand" href="/">GitHub Documentation</a>
           <div class="btn-group pull-right">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="icon-user"></i> Username
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Profile</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Sign Out</a></li>
-            </ul>
+            <button class="btn" data-toggle="modal" data-target="#settings">
+              <i class="icon-cog"></i> Settings
+            </button>
           </div>
           <div class="nav-collapse">
             <ul class="nav">
@@ -41,3 +35,26 @@
       </footer>
 
     </div><!--/.fluid-container-->
+<div class="modal hide" id="settings">
+  <form class="modal-form form-vetical" autocomplete="off" action="/api/settings/save" method="post">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>User Settings</h3>
+    </div>
+    <div class="modal-body">
+        <fieldset>
+            <div class="control-group">
+                <label class="control-label" for="username">Username</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="username" name="username" data-provide="typeahead" />
+                    <p class="help-block">Enter the username of the user you wish to impersoante</p>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+</form>
+</div>

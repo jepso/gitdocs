@@ -2,7 +2,7 @@ var process = require('./fileprocessor').process;
 require('./filehelpers');
 var render = require('./filerenderer').render;
 
-exports.renderFile = function(file, res){
+exports.renderFile = function(file, req, res){
     var locals = {
         mode:'render',
         path:file.path,
@@ -14,5 +14,5 @@ exports.renderFile = function(file, res){
 
     process(locals);
 
-    render(locals, res);
+    render(locals, req, res);
 };

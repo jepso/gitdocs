@@ -7,8 +7,8 @@ function get(url){
             if(err) deferred.reject(err);
             else if (result.statusCode !== 200) deferred.reject(result.statusCode);
             else deferred.resolve(JSON.parse(body.toString()));
-            console.log(url);
-            console.log(result.headers);
+            //console.log(url);
+            //console.log(result.headers);
         });
         return deferred.promise;
     }
@@ -16,13 +16,13 @@ function get(url){
     var checkedTimes = 0;
     return cacheHandler.get('web-cache', url).then(function(cache){
         if(!cache){
-            console.log("cache miss");
+            //console.log("cache miss");
             return Q.reject("cache miss");
         }
         else if ((Math.round((new Date()).getTime() / 1000) - cache.checkedLast) > Math.min(60 + 60*cache.checkedTimes, 60*60*2)){
             cachedVersion = JSON.parse(cache.data);
             checkedTimes = cache.checkedTimes;
-            console.log("cache out of date by: "+(Math.round((new Date()).getTime() / 1000) - cache.checkedLast) + " vs " + Math.min(60 + 60*cache.checkedTimes, 60*60*2));
+            //console.log("cache out of date by: "+(Math.round((new Date()).getTime() / 1000) - cache.checkedLast) + " vs " + Math.min(60 + 60*cache.checkedTimes, 60*60*2));
             return Q.reject("cache out of date");
         }else{
             //console.log("cache hit");
