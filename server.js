@@ -15,11 +15,22 @@
 //  account
 
 /**
- * Load dependencies
+ * [Express](http://www.expressjs.com) is the http server framework
+ *
+ * We load it, then use it to create a server.
  */
 var express   = require('express');
 var app 	  = express.createServer();
+
+/**
+ * We load the git-api defined in [git-api.js](git-api.js)
+ */
 var getObject = require('./git-api').getObject;
+
+/**
+ * The [git-proxy](git-proxy.js) is the module of the application that 
+ * decides how to render each page from GitHub.
+ */
 var proxy 	  = require('./git-proxy');
 
 /**
@@ -72,7 +83,7 @@ app.use(app.router);
  *
  * This is the real meat of the application.  We request the object from GitHub with the same path.
  * 
- * Once we have an object we run it through the proxy, whih sends it to the user.
+ * Once we have an object we run it through the proxy, which sends it to the user.
  *
  * In the event of failure while attempting to get an object using getObject:
  * 
@@ -92,6 +103,8 @@ app.use(function(req,res, next){
 });
 
 /**
+ * # Listen
+ * 
  * Begin listening on port 3000
  */
 app.listen(3000);
