@@ -19,7 +19,7 @@ function get(url){
             //console.log("cache miss");
             return Q.reject("cache miss");
         }
-        else if ((Math.round((new Date()).getTime() / 1000) - cache.checkedLast) > Math.min(60 + 60*cache.checkedTimes, 60*60*2)){
+        else if ((Math.round((new Date()).getTime() / 1000) - cache.checkedLast) > Math.min(30*cache.checkedTimes, 60*60)){
             cachedVersion = JSON.parse(cache.data);
             checkedTimes = cache.checkedTimes;
             //console.log("cache out of date by: "+(Math.round((new Date()).getTime() / 1000) - cache.checkedLast) + " vs " + Math.min(60 + 60*cache.checkedTimes, 60*60*2));

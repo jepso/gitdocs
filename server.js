@@ -36,18 +36,28 @@ var proxy 	  = require('./git-proxy');
 
 /**
  * # Configure Views
+ *
+ * ['configure-views'](configure-views.js) configures the views module ([QEJS](/jepso/QEJS)).
  */
 require('./configure-views')(app);
 /**
  * # Configure Styles
+ *
+ * ['configure-styles'](configure-styles.js) configures [less](http://lesscss.org) to compile to css.
+ * It also sets up static file serving of images.
  */
 require('./configure-style')(app);
 /**
  * # Handle static files
+ *
+ * Mostly just some JavaScript
  */
 app.use(express.static(__dirname + '/static'));
 /**
  * # Configure Settings
+ *
+ * ['configure-settings'](configure-settings.js) will (once finished) provide the settings store
+ * to keep track of user preferences.
  */
 require('./configure-settings')(app);
 

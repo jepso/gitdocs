@@ -8,7 +8,7 @@ function delay(){
 			console.log("dummy network error");
 			def.reject(new Error("Network error"));
 		}
-	}, 300);
+	}, 0);
 	return def.promise;
 }
 
@@ -32,10 +32,10 @@ function clean(){
 	var table = data['web-cache'];
 	if(table){
 		Object.keys(table).forEach(function(key){
-			if((current-table[key].checkedLast) > (60*60*48)) delete table[key];
+			if((current-table[key].checkedLast) > (60*60)) delete table[key];
 		});
 	}
 }
-setInterval(clean, 1000*60);
+setInterval(clean, 60*60);
 clean();
 exports.clean = clean;
