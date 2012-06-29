@@ -75,10 +75,11 @@ app.use(app.router);
  * Once we have an object we run it through the proxy, whih sends it to the user.
  *
  * In the event of failure while attempting to get an object using getObject:
- *     If it is a 404 error, we simply call next, 
- *     leading to the default 404 error page being served by express.
+ * 
+ * If it is a 404 error, we simply call next, 
+ * leading to the default 404 error page being served by express.
  *
- *     If it is not a 404 error, we simply pass it to next.
+ * If it is not a 404 error, we simply pass it to next.
  */
 app.use(function(req,res, next){
 	var path = require('url').parse(req.url).pathname;
