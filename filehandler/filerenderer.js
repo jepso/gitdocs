@@ -17,7 +17,6 @@ function checkDirectory(dir) {
         }
         return output;
     } else if (/\.html$/.test(dir)) {
-        console.log(dir);
         var output = {path:dir, name: undefined, description: undefined, thumbnail: undefined, screenshot: undefined, supports: [], supportsAll:undefined};
         var locals = {mode:'describe', open:'{{', close:'}}'};
         locals.extensions = {};
@@ -30,8 +29,6 @@ function checkDirectory(dir) {
             output.supportsAll = true;
         };
         return qejs.renderFile(dir, locals).then(function(v){
-            console.log(output);
-            console.log(v);
             if(typeof output.supportsAll === 'undefined') output.supportsAll = false;
             if(output.supports.length === 0 && !output.supportsAll) { 
                 throw new Error(dir + ': A template must either support all text file formats, or specify which formats it does support.');
@@ -61,7 +58,6 @@ function render(locals, req, res) {
     locals.extension;
     locals.mode = 'render';
     templates.then(function (templates) {
-        console.log(templates);
         if (templates.byExtension[locals.extension] && templates.byExtension[locals.extension].length > 0) {
             res.render(templates.byExtension[locals.extension][0].path, locals);
         } else {

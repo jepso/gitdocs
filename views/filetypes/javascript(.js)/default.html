@@ -1,18 +1,9 @@
 {{ if(mode === 'describe') {
     extensions.supports('js');
 } else if (mode==='render') {
-    inherits('layouts/fluid') -}}
+    inherits('layouts/file') -}}
 <div class="row-fluid">
-    <div class="span3">
-        <div class="well">
-            <p>This file is JavaScript.</p>
-
-            <p>Can you help us provide better formatting for it?  Maybe even a way of automatically parsing it for documentation?  If so, help us expand our list of supported file types.</p>
-
-            <a href="{{=source}}" class="btn btn-inverse">View file on github</a>
-        </div><!--/.well -->
-    </div><!--/span-->
-    <div class="span9">
+    <div class="span12">
         <pre><code>{{-highlight()}}</code></pre>
     </div><!--/span-->
 </div><!--/row-->

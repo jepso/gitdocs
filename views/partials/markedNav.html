@@ -1,0 +1,26 @@
+<div class="well" style="padding: 8px 0;">
+    <ul class="nav nav-list">
+    {{ nav.forEach(function(heading){ 
+        var style = "";
+        var clas = "";
+        if(heading.depth === 1) {
+            style = "font-size: 1.4em;";
+        }
+        if(heading.depth > 3){
+            style = 'font-size: 0.8em; margin-left: ' + (10*(heading.depth-3)) + 'px;';
+        }
+        if(heading.depth < 3) {
+            clas = "nav-header";
+        }
+    }}
+        {{ if(heading.depth === 2) { }}
+            <li class="divider"></li>
+        {{ } }}
+        <li style="{{=style}}" class="{{=clas}}">
+            <a href="#{{=heading.path}}">
+                {{=heading.name}}
+            </a>
+        </li>
+    {{ }); }}
+    </ul>
+</div>

@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid highlight-{{=highlightThemeSelected}}">
       {{ if(typeof breadcrumb === 'string'){ }}{{-breadcrumb}}{{ } }}
       
       {{-contents}}
@@ -36,3 +36,19 @@
 
     </div><!--/.fluid-container-->
 {{-render('partials/settingsDialog.html')}}
+<script>
+//This script corrects for over scrolling (because of the fixed nav bar).
+var silence = false;
+function onHashChange() {
+  if(silence) return silence = false;
+  if(/\/$/.test(location.hash)) {
+    location.hash = location.hash.replace(/\/$/, '');
+  } else {
+    //We don't want to do this on very small (mobile) screens.
+    if(window.innerWidth > 979) window.scrollTo(0, document.body.scrollTop - 40);
+    silence = true;
+    location.hash = location.hash + "/";
+  }
+}
+$(window).bind('hashchange', onHashChange);
+</script>

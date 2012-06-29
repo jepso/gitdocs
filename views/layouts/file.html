@@ -1,0 +1,29 @@
+{{inherits('fluid')}}
+<ul class="nav nav-tabs">
+    <li id="doc-tab" class="active"><a href="#">Documentation</a></li>
+    <li id="source-tab"><a href="#">Source Code</a></li>
+</ul>
+<div id="doc-tab-contents">
+{{-contents}}
+</div>
+<div id="source-tab-contents" class="row-fluid" style="display: none;">
+    <div class="span12">
+        {{-render('partials/sourceCode')}}
+    </div>
+</div>
+<script>
+$("#doc-tab a").click(function (e) {
+    e.preventDefault();
+    $("#source-tab").removeClass("active");
+    $("#doc-tab").addClass("active");
+    $("#source-tab-contents").hide();
+    $("#doc-tab-contents").show();
+});
+$("#source-tab a").click(function (e) {
+    e.preventDefault();
+    $("#doc-tab").removeClass("active");
+    $("#source-tab").addClass("active");
+    $("#doc-tab-contents").hide();
+    $("#source-tab-contents").show();
+});
+</script>

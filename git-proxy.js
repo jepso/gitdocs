@@ -18,7 +18,8 @@ function user(data, req, res, next) {
 };
 function directory(data, req, res, next) {
     if(data.readme.exists){
-        data.readme.content = marked(data.readme.content);
+        require('./filehandler/filehelpers');
+        require('./filehandler/fileprocessor').process(data.readme);
     }
     res.render('directory', data);
 };
@@ -26,15 +27,16 @@ function file(data, req, res, next) {
     require('./filehandler').renderFile(data, req, res);
 };
 function image(data, req, res, next) {
+    data.mode = 'render';
     res.render('filetypes/images(.png.gif.jpeg.jpg)/image', data);
 };
 
 var marked = require('marked');
 // Set default options
 marked.setOptions({
-  gfm: true,
-  pedantic: false,
-  sanitize: true,
-  // callback for code highlighter
-  highlight: require('./highlighter')
+    gfm: true,
+    pedantic: false,
+    sanitize: true,
+    // callback for code highlighter
+    highlight: require('./highlighter')
 });

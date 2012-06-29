@@ -24,13 +24,17 @@
 {{ }); }}
 </ul>
 </div>
+{{ if(readme.exists){
+var marked = readme.marked(); }}
+{{ marked -> marked}}
+  {{-render('partials/markedNav', marked)}}
+{{ <- }}
 
-{{ if(readme.exists){ }}
     </div><!--/span-->
-    <div class="span6">
-        {{-readme.content /*readme.extension*/}}
+    <div class="span8">        
+        <div style="max-width:700px">
+            {{-marked.then(function(v){ return v.text; }) /*readme.extension*/}}
+        </div>
     </div><!--/span-->
-    <div class="span2">
-    </div>
 </div><!--/row-->
 {{ } }}

@@ -1,20 +1,12 @@
 var Q = require('q');
 
 module.exports = function (app) {
-    app.engine('html', (function () {
-        var engine = require('qejs');
-        return function (path, options, fn) {
-            engine.renderFile(path, options).then(function (result) {
-                fn(null, result);
-            }, function (err) {
-                fn(err);
-            }).end();
-        };
-    }()));
+    app.engine('html', require('consolidate').qejs);
     app.set('view engine', 'html');
     app.locals.use(function (req, res) {
         res.locals.open  = '{{';
         res.locals.close = '}}';
+        res.locals.cache = false;
     });
 
 

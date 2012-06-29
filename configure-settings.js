@@ -18,5 +18,5 @@ module.exports = function (app) {
         if(key === 'cookie') res.send(403);
         req.userSettings[key] = req.body;
         res.json(req.body);
-    })
+    });
 };

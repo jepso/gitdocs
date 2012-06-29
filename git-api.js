@@ -184,9 +184,14 @@ function getFileOrDir(location, readmePromise) {
 function getReadme(location) {
     var readmeurl = 'https://api.github.com/repos/' + location.user + '/' + location.repo + '/readme/'+location.path;
     return get(readmeurl).then(function(readmemetafile){
+        console.log(readmemetafile.path);
         return {
             exists:true, 
-            extension:/.(\w*)$/g.exec(readmemetafile.path)[0], 
+            type: 'file',
+            path: '/'+location.user+'/'+location.repo+'/'+readmemetafile.path,
+            name: readmemetafile.path,
+            source:readmemetafile._links.html,
+            extension:/\.(\w*)$/g.exec(readmemetafile.path)[0], 
             content:new Buffer(readmemetafile.content, readmemetafile.encoding).toString()
         };
     }, function(err){

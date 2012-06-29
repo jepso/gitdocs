@@ -34,9 +34,8 @@ function use(extensions, name, method){
         extensions.forEach(function(ext){
             hash[ext.replace(/^\.?/, '.')] = true;
         });
-        console.log(hash);
         
-        chain.push(function (locals) { console.log(locals.extension, name);
+        chain.push(function (locals) {
             if(hash[locals.extension] === true){
                 if(typeof locals[name] !== 'undefined') throw new Error('The method you are attempting to add already exists');
                 locals[name] = method;
