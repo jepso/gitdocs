@@ -13,15 +13,30 @@
 //  signup
 //  settings
 //  account
+
+/**
+ * Load dpendencies
+ */
 var express   = require('express');
 var app 	  = express.createServer();
 var getObject = require('./git-api').getObject;
 var proxy 	  = require('./git-proxy');
 
-
+/**
+ * Configure Views
+ */
 require('./configure-views')(app);
+/**
+ * Configure Styles
+ */
 require('./configure-style')(app);
+/**
+ * Handle static files
+ */
 app.use(express.static(__dirname + '/static'));
+/**
+ * Configure Settings
+ */
 require('./configure-settings')(app);
 
 app.get('/', function(req, res){
