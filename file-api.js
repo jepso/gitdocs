@@ -47,3 +47,4 @@ function getDirectory(path, readme) {
 }
 
 module.exports.getObject = getObject;
+module.exports.handlesHome = true;

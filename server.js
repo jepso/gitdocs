@@ -9,7 +9,7 @@
  * @param  {function} getObject adheres to the same spec as git-api and file-api
  * @param  {integer}  port      The port number to run the app on.
  */
-module.exports = function(getObject, port) {
+module.exports = function(api, port) {
     /*!
       */
     //Reserved prefixes:
@@ -20,6 +20,8 @@ module.exports = function(getObject, port) {
     //  settings
     //  account
 
+    var getObject = api.getObject;
+
     /**
      * [Express](http://www.expressjs.com) is the http server framework
      *
@@ -29,7 +31,6 @@ module.exports = function(getObject, port) {
     var app       = express.createServer();
 
     /**
-     * # Proxy
      * The [git-proxy](git-proxy.js) is the module of the application that 
      * decides how to render each page from GitHub.
      */
@@ -67,9 +68,11 @@ module.exports = function(getObject, port) {
      * 
      * Handle requests for the home page by rendering the 'home' view.
      */
-    app.get('/', function(req, res){
-      res.render('home');
-    });
+    if (!api.handlesHome) {
+        app.get('/', function(req, res){
+          res.render('home');
+        });
+    }
 
     /**
      * # Favicon
@@ -120,7 +123,8 @@ module.exports = function(getObject, port) {
      * Begin listening on port
      */
     app.listen(port);
-
+/*!
+ */
 };
 
 
@@ -128,9 +132,6 @@ module.exports = function(getObject, port) {
  * We load the git-api defined in [git-api.js](git-api.js) or
  * the file-api defined in [file-api.js](file-api.js)
  */
-var getGit  = require('./git-api').getObject;
-var getFile = require('./file-api').getObject;
-
 if (!module.parent) {
-	module.exports(getGit, 8080);
+	module.exports(require('./git-api'), process.env.PORT || 2000);
 }

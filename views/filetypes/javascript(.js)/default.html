@@ -6,6 +6,7 @@
     <div class="span12">
         {{ dox() -> comments}}
         {{ comments.forEach(function(comment){ }}
+              <div style="display:none;">{{=JSON.stringify(comment)}}</div>
               {{ if(!comment.ignore && !comment.isPrivate) { }}
                     <div class="comment {{- (comment.ctx?comment.ctx.type:'')}}">
                           {{ if(comment.ctx){ }}<h1>{{= comment.ctx.string }}</h1>{{ } }}

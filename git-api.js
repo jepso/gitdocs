@@ -201,3 +201,4 @@ function getReadme(location) {
 }
 
 module.exports.getObject = getObject;
+module.exports.handlesHome = false;
