@@ -1,27 +1,24 @@
 <% if (typeof tags !== 'undefined') { %>
 
-<dl class="param-list">
-
+<!--<dl class="param-list">-->
     <% tags.forEach(function (tag, i) { %>
-        <% if(tag.type === '') return; %>
-        <br />
+        <% /*if(tag.type === '') return;*/ %>
+        <div class="row-fluid">
         <% if (tag.type === 'param') { %>
-            <dt class="param-name"><%= tag.name %></dt>
-            <% if (tag.types.length === 1) { %>
-                <dd class="param-type param-type-<%= tag.types[0].toLowerCase() %>"><%= tag.types[0] %></dd>
+            <div class="span4"><div class="param-name"><%= tag.name %></div></div>
+            <div class="span3"><% if (tag.types.length === 1) { %>
+                <div class="param-type param-type-<%= tag.types[0].toLowerCase() %>"><%= tag.types[0] %></div>
             <% } else { %>
-                <dd class="param-type"><%= tag.types.join(' | ') %></dd>
-            <% } %>
-            <dd class="param-desc"><%= tag.description %>
-                <%- tags.filter(function (cTag, cI) {
-                    return cI > i;
-                    }).reduce(function (acc, curr) {
-                        acc.continue = acc.continue && curr.type === '';
-                        if (acc.continue) acc.result.push(curr.string);
-                        return acc;
-                    }, {result: [], continue: true}).result.join('<br />') %>
-            </dd>
+                <div class="param-type"><%= tag.types.join(' | ') %></div>
+            <% } %></div>
+            <div class="span5"><div class="param-desc"><%= tag.description %>
+            </div></div>
+        <% } else if (tag.type === '') { %>
+            <div class="span7"></div>
+            <div class="span5"><div class="param-desc"><%= tag.string %>
+            </div></div>
         <% } %>
+        </div>
     <% }) %>
-</dl>
+<!--</dl>-->
 <% } %>

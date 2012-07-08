@@ -8,12 +8,12 @@
         <% comments.forEach(function(comment){ %>
 <div class="row-fluid" style="overflow: hidden;">
     <!--<%- JSON.stringify(comment).replace(/\-\-\>/g, '- - >') %>-->
-    <div class="span6 comment <%- (comment.ctx?comment.ctx.type:'')%>">
+    <div class="span5 comment <%- (comment.ctx?comment.ctx.type:'')%>">
         <% if(comment.ctx){ %><h1><%= comment.ctx.string %></h1><% } %>
         <div class="description"><%- comment.description.full %></div>
         <%- render('partials/tags', comment) %>
     </div><!--/span-->
-    <div class="span6">
+    <div class="span7">
         <div class="source-code" style="margin-bottom: -99999px; padding-bottom: 99999px;">
             <% if(comment.code){ %>
                 <pre><code><%- highlight(comment.code, 'javascript') %></code></pre>
