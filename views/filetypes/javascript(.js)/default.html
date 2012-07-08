@@ -1,4 +1,6 @@
 <% if(mode === 'describe') {
+    name('Simple')
+    description('Simply renders comments, then the source code in a linear manner')
     extensions.supports('js');
 } else if (mode==='render') {
     inherits('layouts/file') -%>
@@ -6,16 +8,16 @@
     <div class="span12">
         <% dox() -> comments%>
         <% comments.forEach(function(comment){ %>
-              <div style="display:none;"><%=JSON.stringify(comment)%></div>
-              <% if(!comment.ignore && !comment.isPrivate) { %>
-                    <div class="comment <%- (comment.ctx?comment.ctx.type:'')%>">
-                          <% if(comment.ctx){ %><h1><%= comment.ctx.string %></h1><% } %>
-                          <div class="description"><%- comment.description.full %></div>
-                          <% if(comment.code){ %>
-                                <pre><code><%- highlight(comment.code, 'javascript') %></code></pre>
-                          <% } %>
-                    </div>
-              <% } %>
+            <!--<%- JSON.stringify(comment).replace(/\-\-\>/g, '- - >') %>-->
+            <% if(!comment.ignore && !comment.isPrivate) { %>
+                <div class="comment <%- (comment.ctx?comment.ctx.type:'')%>">
+                    <% if(comment.ctx){ %><h1><%= comment.ctx.string %></h1><% } %>
+                    <div class="description"><%- comment.description.full %></div>
+                    <% if(comment.code){ %>
+                        <pre><code><%- highlight(comment.code, 'javascript') %></code></pre>
+                    <% } %>
+                </div>
+            <% } %>
         <% }) %>
         <% <- %>
     </div><!--/span-->

@@ -49,7 +49,7 @@ use('.js', 'dox', function (options) {
         options = options || {};
         var raw = options.raw;
         options.raw = true;
-        var processed = require('dox').parseComments(content, options);
+        var processed = require('./custom-dox').parseComments(content, options);
         if (!raw) {
             processed.forEach(function (comment) {
                 var description = comment.description;

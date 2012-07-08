@@ -17,7 +17,7 @@ function checkDirectory(dir) {
         }
         return output;
     } else if (/\.html$/.test(dir)) {
-        var output = {path:dir, name: undefined, description: undefined, thumbnail: undefined, screenshot: undefined, supports: [], supportsAll:undefined};
+        var output = {path:dir, name: undefined, description: '', thumbnail: undefined, screenshot: undefined, supports: [], supportsAll:undefined, default: false};
         var locals = {mode:'describe', cache: true};
         locals.extensions = {};
         locals.extensions.supports = function(){
@@ -27,6 +27,15 @@ function checkDirectory(dir) {
         };
         locals.extensions.supportsAll = function(){
             output.supportsAll = true;
+        };
+        locals.name = function (name) {
+            output.name = name;
+        };
+        locals.description = function (description) {
+            output.description = description;
+        };
+        locals.default = function () {
+            output.default = true;
         };
         return qejs.renderFile(dir, locals).then(function(v){
             if(typeof output.supportsAll === 'undefined') output.supportsAll = false;

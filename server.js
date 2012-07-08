@@ -100,7 +100,7 @@ module.exports = function(api, port) {
      * 
      * Once we have an object we run it through the proxy, which sends it to the user.
      *
-     * In the event of failure while attempting to get an object using getObject:
+     * ## getObject Failure
      * 
      * If it is a 404 error, we simply call next, 
      * leading to the default 404 error page being served by express.
@@ -129,9 +129,13 @@ module.exports = function(api, port) {
 
 
 /**
- * We load the git-api defined in [git-api.js](git-api.js) or
- * the file-api defined in [file-api.js](file-api.js)
+ * # Default behaviour.
+ * 
+ * We load the git-api defined in [git-api.js](git-api.js) if this file was called directly.
+ *
+ * If the app was run as a command line app to serve a given folder, we will rely on the exported
+ * module.
  */
 if (!module.parent) {
-	module.exports(require('./git-api'), process.env.PORT || 2000);
+	module.exports(require('./git-api'), process.env.PORT || 5000);
 }
