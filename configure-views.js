@@ -5,8 +5,6 @@ module.exports = function (app) {
     app.set('view engine', 'html');
     app.set('views', __dirname + '/views');
     app.locals.use(function (req, res) {
-        res.locals.open  = '{{';
-        res.locals.close = '}}';
         res.locals.cache = false;
     });
 

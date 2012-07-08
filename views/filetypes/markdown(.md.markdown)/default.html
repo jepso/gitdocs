@@ -1,17 +1,17 @@
-{{ if (mode==='describe') { 
+<% if (mode==='describe') { 
     extensions.supports('.md', '.markdown');
-} else if (mode === 'render') { }}
-{{ inherits('layouts/file') -}}
+} else if (mode === 'render') { %>
+<% inherits('layouts/file') -%>
 <div class="row-fluid">
-    {{ marked() -> marked }}
+    <% marked() -> marked %>
     <div class="span3">
-        {{-render('partials/markedNav', marked)}}
+        <%- render('partials/markedNav', marked) %>
     </div><!--/span-->
     <div class="span9">
         <div style="max-width:700px">
-            {{-marked.text}}
+            <%- marked.text %>
         </div>
     </div><!--/span-->
-    {{ <- }}
+    <% <- %>
 </div><!--/row-->
-{{ } }}
+<% } %>

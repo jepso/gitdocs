@@ -1,40 +1,40 @@
-{{ inherits('layouts/fluid') -}}
+<% inherits('layouts/fluid') -%>
 
-{{ if(readme.exists){ }}
+<% if(readme.exists){ %>
 	<div class="row-fluid">
     <div class="span4">
-{{ } }}
+<% } %>
 <div class="well" style="padding: 8px 0;">
 <ul class="nav nav-list">
-{{ directories.forEach(function(dir){ }}
+<% directories.forEach(function(dir){ %>
 	<li>
-		<a href="{{=dir.path}}/">
+		<a href="<%=dir.path%>/">
 			<i class="icon-folder-open"></i>
-			{{=dir.name}}
+			<%=dir.name%>
 		</a>
 	</li>
-{{ }); }}
-{{ files.forEach(function(file){ }}
+<% }); %>
+<% files.forEach(function(file){ %>
 	<li>
-		<a href="{{=file.path}}">
+		<a href="<%=file.path%>">
 			<i class="icon-file"></i>
-			{{=file.name}}
+			<%=file.name%>
 		</a>
 	</li>
-{{ }); }}
+<% }); %>
 </ul>
 </div>
-{{ if(readme.exists){
-var marked = readme.marked(); }}
-{{ marked -> marked}}
-  {{-render('partials/markedNav', marked)}}
-{{ <- }}
+<% if(readme.exists){
+var marked = readme.marked(); %>
+<% marked -> marked%>
+  <%-render('partials/markedNav', marked)%>
+<% <- %>
 
     </div><!--/span-->
     <div class="span8">        
         <div style="max-width:700px">
-            {{-marked.then(function(v){ return v.text; }) /*readme.extension*/}}
+            <%-marked.then(function(v){ return v.text; }) /*readme.extension*/%>
         </div>
     </div><!--/span-->
 </div><!--/row-->
-{{ } }}
+<% } %>

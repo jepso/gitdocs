@@ -1,11 +1,11 @@
-{{ inherits('layouts/main') -}}
-<a href="{{=user.html_url}}"><h1 style="color:black;">{{=user.login}}<span style="color:gray">({{=user.name}})</span></h1></a>
+<% inherits('layouts/main') -%>
+<a href="<%=user.html_url%>"><h1 style="color:black;"><%=user.login%><span style="color:gray">(<%=user.name%>)</span></h1></a>
 <br/>
-{{ repos.forEach(function(repo){/*path, language, name, private, description, watchers, forks, updated_at*/ }}
-	<a href="/{{=repo.path}}/" style="color:black; text-decoration:none;"><div class="well" >
+<% repos.forEach(function(repo){/*path, language, name, private, description, watchers, forks, updated_at*/ %>
+	<a href="/<%=repo.path%>/" style="color:black; text-decoration:none;"><div class="well" >
 		<i class="icon-book large"></i>
-		<strong>{{=repo.name}}</strong>
-		<span style="float:right;"><i class="icon-eye-open"></i> {{=repo.watchers}}</span>
-		<p>{{=repo.description}}</p>
+		<strong><%= repo.name %></strong>
+		<span style="float:right;"><i class="icon-eye-open"></i> <%= repo.watchers %></span>
+		<p><%= repo.description %></p>
 	</div></a>
-{{ }); }}
+<% }); %>

@@ -18,7 +18,7 @@ function checkDirectory(dir) {
         return output;
     } else if (/\.html$/.test(dir)) {
         var output = {path:dir, name: undefined, description: undefined, thumbnail: undefined, screenshot: undefined, supports: [], supportsAll:undefined};
-        var locals = {mode:'describe', open:'{{', close:'}}'};
+        var locals = {mode:'describe', cache: true};
         locals.extensions = {};
         locals.extensions.supports = function(){
             for(var i = 0; i<arguments.length; i++){

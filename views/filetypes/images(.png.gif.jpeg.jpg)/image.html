@@ -1,10 +1,10 @@
-{{ if(mode === 'describe') {
+<% if(mode === 'describe') {
     extensions.supports('png', 'gif', 'jpeg', 'jpg');
 } else if (mode==='render') {
-    inherits('layouts/main') -}}
-<h1>{{=name}}</h1>
+    inherits('layouts/main') -%>
+<h1><%=name%></h1>
 <div class="well">
-<a href="{{=source}}"><img src="{{=url}}" /></a></br>
+<a href="<%= source %>"><img src="<%=url%>" /></a></br>
 </div>
-<a href="{{=source}}">source</a>
-{{ } }}
+<a href="<%= source %>">source</a>
+<% } %>

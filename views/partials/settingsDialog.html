@@ -10,10 +10,10 @@
                 <label class="control-label" for="highlight">Highlighting Theme</label>
                 <div class="controls">
                     <select id="highlight" name="highlight" class="input-xlarge" >
-                      {{ highlightThemes.forEach(function (theme){ }}
-                        <option id="select-hilight-{{=theme}}"{{if (highlightThemeSelected === theme) { }} selected="true"{{ } }}>
-                          {{=theme}}</option>
-                      {{ }); }}
+                      <% highlightThemes.forEach(function (theme){ %>
+                        <option id="select-hilight-<%= theme %>"<% if (highlightThemeSelected === theme) { %> selected="true"<% } %>>
+                          <%= theme %></option>
+                      <% }); %>
                     </select>
                     <p class="help-block">To view previews of each theme, look 
                       <a href="http://softwaremaniacs.org/media/soft/highlight/test.html" target="_blank">here</a></p>
@@ -29,7 +29,7 @@
 </div>
 <script>
   $(function(){
-    var oldTheme = '{{=highlightThemeSelected}}';
+    var oldTheme = '<%= highlightThemeSelected %>';
     var store = false;
     $("#saveSettings").click(function () {
       $(".container-fluid").removeClass('highlight-'+oldTheme);

@@ -1,14 +1,14 @@
-{{inherits('fluid')}}
+<% inherits('fluid') %>
 <ul class="nav nav-tabs">
     <li id="doc-tab" class="active"><a href="#">Documentation</a></li>
     <li id="source-tab"><a href="#">Source Code</a></li>
 </ul>
 <div id="doc-tab-contents">
-{{-contents}}
+<%- contents %>
 </div>
 <div id="source-tab-contents" class="row-fluid" style="display: none;">
     <div class="span12">
-        {{-render('partials/sourceCode')}}
+        <%- render('partials/sourceCode') %>
     </div>
 </div>
 <script>

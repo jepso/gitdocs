@@ -1,14 +1,14 @@
-{{ if (mode==='describe') { 
+<% if (mode==='describe') { 
     extensions.supports('.md', '.markdown');
-} else if (mode === 'render') { }}
-{{ inherits('layouts/fluid') -}}
+} else if (mode === 'render') { %>
+<% inherits('layouts/fluid') -%>
 <div class="row-fluid">
     <!--<div class="span2">
     </div>--><!--/span-->
     <div class="span12" style="text-align: center;">
         <div style="max-width:700px; margin: 0 auto; text-align:left;">
-            {{-Q.when(marked()).then(function(v){return v.text;})}}
+            <%-Q.when(marked()).then(function(v){return v.text;})%>
         </div>
     </div><!--/span-->
 </div><!--/row-->
-{{ } }}
+<% } %>

@@ -1,4 +1,4 @@
-{{inherits('base')}}
+<% inherits('base') %>
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -23,10 +23,10 @@
       </div>
     </div>
 
-    <div class="container-fluid highlight-{{=highlightThemeSelected}}">
-      {{ if(typeof breadcrumb === 'string'){ }}{{-breadcrumb}}{{ } }}
+    <div class="container-fluid highlight-<%= highlightThemeSelected %>">
+      <% if(typeof breadcrumb === 'string'){ %><%- breadcrumb %><% } %>
       
-      {{-contents}}
+      <%- contents %>
 
           <hr>
 
@@ -38,7 +38,7 @@
 
 
 
-{{-render('partials/settingsDialog.html')}}
+<%- render('partials/settingsDialog.html') %>
 <script>
 //This script corrects for over scrolling (because of the fixed nav bar).
 var silence = false;
